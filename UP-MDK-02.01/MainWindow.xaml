@@ -1,0 +1,35 @@
+﻿<Window x:Class="UP_MDK_02._01.MainWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UP_MDK_02._01"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="720" Width="1280">
+    <Grid Background="#ffdadada">
+        <Border Margin="40 25 40 25" Background="White" VerticalAlignment="Stretch" Padding="30" CornerRadius="20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0" />
+            </Border.Effect>
+            <StackPanel Margin="0,0,0,40">
+                <TextBlock Text="Отдел кадров" FontSize="30" FontWeight="Bold"  Margin="0 0 0 20" />
+                <Grid>
+                    <DataGrid Name="WorkersGrid" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding ident}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding last_name}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding first_name}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding patronymic}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Должность" Binding="{Binding post}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Номер телефона" Binding="{Binding phone_number}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Email" Binding="{Binding email}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <Button Content="Обновить" x:Name="refreshButton" Margin="50" Click="refreshButton_Click" VerticalAlignment="Top" HorizontalAlignment="Right" Width="100"/>
+        <Button Content="Добавить работника" x:Name="addWorkerButton" Margin="40" Click="Button_Window_add_Click" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+    </Grid>
+</Window>
