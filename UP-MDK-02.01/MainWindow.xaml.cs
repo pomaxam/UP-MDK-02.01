@@ -1,5 +1,11 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +18,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using System.DirectoryServices.ActiveDirectory;
 
 namespace UP_MDK_02._01
 {
@@ -54,6 +62,46 @@ namespace UP_MDK_02._01
                 }
             }
             WorkersGrid.ItemsSource = workerList;
+        }
+
+        private void downloadTableButton_Click(object sender, RoutedEventArgs e)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            using (ExcelPackage excelPackage = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Мужики-работяги");
+                worksheet.Cells["A1"].Value = "ID"; ;
+                worksheet.Cells["B1"].Value = "Идентификатор";
+                worksheet.Cells["C1"].Value = "Имя";
+                worksheet.Cells["D1"].Value = "Фамилия";
+                worksheet.Cells["E1"].Value = "Отчество";
+                worksheet.Cells["F1"].Value = "Должность";
+                worksheet.Cells["G1"].Value = "Номер телефона";
+                worksheet.Cells["H1"].Value = "Email";
+                List<Worker> workerList = new List<Worker>();
+                using (var db = new ApplicationContext())
+                {
+                    var query = from b in db.workers select b;
+                    foreach (var item in query)
+                    {
+                        workerList.Add(item);
+                    }
+                }
+                worksheet.Cells["A2"].LoadFromCollection(workerList);
+                string filePath = "Информация о персонале.xlsx";
+                FileInfo fi = new FileInfo(filePath);
+                excelPackage.SaveAs(fi);
+
+                if (MessageBox.Show("Файл создан, открыть сейчас?", "Отдел кадров", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    var p = new Process();
+                    p.StartInfo = new ProcessStartInfo(@"Информация о персонале.xlsx")
+                    {
+                        UseShellExecute = true
+                    };
+                    p.Start();
+                }
+            }
         }
     }
 }

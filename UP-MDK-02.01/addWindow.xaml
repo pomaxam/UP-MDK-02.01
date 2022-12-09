@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UP_MDK_02._01"
         mc:Ignorable="d"
-        Title="MainWindow" Height="525" Width="450">
+        Title="Добавить работника" MinHeight="525" MinWidth="450" Height="525" Width="450">
     <Grid Background="#ffdadada">
         <Border Margin="20" Background="White" Padding="30" CornerRadius="20">
             <Border.Effect>
