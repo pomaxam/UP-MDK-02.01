@@ -34,26 +34,19 @@ namespace UP_MDK_02._01
             string first_name = textBoxFirstName.Text.Trim();
             string last_name = textBoxLastName.Text.Trim();
             string patronymic = textBoxPatronymic.Text.Trim();
-            string post = textBoxPost.Text.Trim();
+            string datebirth = textBoxDatebirth.Text.Trim();
             string phone_number = textBoxPhoneNumber.Text.Trim();
-            string email = textBoxEmail.Text.Trim().ToLower();
+            string department = textBoxDepartment.Text.Trim();
 
-            if (!email.Contains("@") || !email.Contains("."))
-            {
-                textBoxEmail.ToolTip = "Поле заполнено некорректно";
-                textBoxEmail.Background = Brushes.DarkRed;
-            }
-            else
-            {
-                textBoxEmail.ToolTip = "";
-                textBoxEmail.Background = Brushes.Transparent;
+            textBoxDepartment.ToolTip = "";
+            textBoxDepartment.Background = Brushes.Transparent;
 
-                Worker worker = new Worker(ident, first_name, last_name, patronymic, post, phone_number, email);
+            Worker worker = new Worker(ident, first_name, last_name, patronymic, datebirth, phone_number, department);
 
-                db.workers.Add(worker);
-                db.SaveChanges();
-                Hide();
-            }
+            db.workers.Add(worker);
+            db.SaveChanges();
+            Hide();
+            
         }
     }
 }

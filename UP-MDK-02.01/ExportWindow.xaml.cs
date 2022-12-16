@@ -41,9 +41,9 @@ namespace UP_MDK_02._01
                 worksheet.Cells["C1"].Value = "Имя";
                 worksheet.Cells["D1"].Value = "Фамилия";
                 worksheet.Cells["E1"].Value = "Отчество";
-                worksheet.Cells["F1"].Value = "Должность";
+                worksheet.Cells["F1"].Value = "Дата рождения";
                 worksheet.Cells["G1"].Value = "Номер телефона";
-                worksheet.Cells["H1"].Value = "Email";
+                worksheet.Cells["H1"].Value = "Отдел";
                 List<Worker> workerList = new List<Worker>();
                 using (var db = new ApplicationContext())
                 {
@@ -54,14 +54,20 @@ namespace UP_MDK_02._01
                     }
                 }
                 worksheet.Cells["A2"].LoadFromCollection(workerList);
+                string pathString = "Reports";
+                if (Directory.Exists(pathString) == false)
+                {
+                    Directory.CreateDirectory(pathString);
+                }
                 string filePath = "Информация о персонале.xlsx";
-                FileInfo fi = new FileInfo(filePath);
+                pathString = System.IO.Path.Combine(pathString, filePath);
+                FileInfo fi = new FileInfo(pathString);
                 excelPackage.SaveAs(fi);
 
                 if (MessageBox.Show("Файл создан, открыть сейчас?", "Отдел кадров", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     var p = new Process();
-                    p.StartInfo = new ProcessStartInfo("Информация о персонале.xlsx")
+                    p.StartInfo = new ProcessStartInfo(pathString)
                     {
                         UseShellExecute = true
                     };
@@ -83,11 +89,18 @@ namespace UP_MDK_02._01
                 }
             }
             var Json = JsonConvert.SerializeObject(workerList);
-            File.WriteAllText("Информация о персонале.json", Json.ToString());
+            string pathString = "Reports";
+            if (Directory.Exists(pathString) == false)
+            {
+                Directory.CreateDirectory(pathString);
+            }
+            string filePath = "Информация о персонале.json";
+            pathString = System.IO.Path.Combine(pathString, filePath);
+            File.WriteAllText(pathString, Json.ToString());
             if (MessageBox.Show("Файл создан, открыть сейчас?", "Отдел кадров", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 var p = new Process();
-                p.StartInfo = new ProcessStartInfo("Информация о персонале.json")
+                p.StartInfo = new ProcessStartInfo(pathString)
                 {
                     UseShellExecute = true
                 };

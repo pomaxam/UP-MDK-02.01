@@ -18,9 +18,9 @@
                 <TextBox x:Name="textBoxLastName" materialDesign:HintAssist.Hint="Фамилия" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <TextBox x:Name="textBoxFirstName" materialDesign:HintAssist.Hint="Имя" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <TextBox x:Name="textBoxPatronymic" materialDesign:HintAssist.Hint="Отчество" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                <TextBox x:Name="textBoxPost" materialDesign:HintAssist.Hint="Должность" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <TextBox x:Name="textBoxDatebirth" materialDesign:HintAssist.Hint="Дата рождения" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <TextBox x:Name="textBoxPhoneNumber" materialDesign:HintAssist.Hint="Номер телефона" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                <TextBox x:Name="textBoxEmail" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <TextBox x:Name="textBoxDepartment" materialDesign:HintAssist.Hint="Отдел" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <Button Content="Добавить" x:Name="addButton" Margin="0 20" Click="addButton_Click"/>
             </StackPanel>
         </Border>

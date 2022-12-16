@@ -69,5 +69,10 @@ namespace UP_MDK_02._01
             ExportWindow exportWindow = new ExportWindow();
             exportWindow.Show();
         }
+
+        private void WorkersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

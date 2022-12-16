@@ -21,9 +21,9 @@
                             <DataGridTextColumn Header="Фамилия" Binding="{Binding last_name}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Имя" Binding="{Binding first_name}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Отчество" Binding="{Binding patronymic}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Должность" Binding="{Binding post}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Дата рождения" Binding="{Binding datebirth}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Номер телефона" Binding="{Binding phone_number}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Email" Binding="{Binding email}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Отдел" Binding="{Binding department}"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
