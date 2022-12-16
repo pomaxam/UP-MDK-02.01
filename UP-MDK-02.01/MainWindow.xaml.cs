@@ -20,6 +20,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using System.DirectoryServices.ActiveDirectory;
+using System.ComponentModel;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace UP_MDK_02._01
 {
@@ -28,20 +30,10 @@ namespace UP_MDK_02._01
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Worker> workerList = new List<Worker>();
         public MainWindow()
         {
             InitializeComponent();
-
-            List<Worker> workerList = new List<Worker>();
-            using (var db = new ApplicationContext())
-            {
-                var query = from b in db.workers select b;
-                foreach (var item in query)
-                {
-                    workerList.Add(item);
-                }
-            }
-            WorkersGrid.ItemsSource = workerList;
         }
 
         private void Button_Window_add_Click(object sender, RoutedEventArgs e)
@@ -70,8 +62,42 @@ namespace UP_MDK_02._01
             exportWindow.Show();
         }
 
-        private void WorkersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        List<Worker> filterModeList = new List<Worker>();
+        private void textBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
+            filterModeList.Clear();
+
+            if (textBoxSearch.Text.Equals(""))
+            {
+                List<Worker> workerList = new List<Worker>();
+                using (var db = new ApplicationContext())
+                {
+                    var query = from b in db.workers select b;
+                    foreach (var item in query)
+                    {
+                        workerList.Add(item);
+                    }
+                }
+                WorkersGrid.ItemsSource = workerList;
+            }
+            else
+            {
+                List<Worker> workerList = new List<Worker>();
+                using (var db = new ApplicationContext())
+                {
+                    var query = from b in db.workers select b;
+                    foreach (var item in query)
+                    {
+                        if (item.ident.Contains(textBoxSearch.Text) || item.first_name.Contains(textBoxSearch.Text) || item.last_name.Contains(textBoxSearch.Text)
+                            || item.patronymic.Contains(textBoxSearch.Text) || item.datebirth.Contains(textBoxSearch.Text) || item.phone_number.Contains(textBoxSearch.Text)
+                            || item.department.Contains(textBoxSearch.Text))
+                        {
+                            workerList.Add(item);
+                        }
+                    }
+                }
+                WorkersGrid.ItemsSource = workerList;
+            }
 
         }
     }
