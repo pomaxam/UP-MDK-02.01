@@ -34,6 +34,16 @@ namespace UP_MDK_02._01
         public MainWindow()
         {
             InitializeComponent();
+            List<Worker> workerList = new List<Worker>();
+            using (var db = new ApplicationContext())
+            {
+                var query = from b in db.workers select b;
+                foreach (var item in query)
+                {
+                    workerList.Add(item);
+                }
+            }
+            WorkersGrid.ItemsSource = workerList;
         }
 
         private void Button_Window_add_Click(object sender, RoutedEventArgs e)
